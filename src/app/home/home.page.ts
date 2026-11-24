@@ -17,6 +17,7 @@ import {
   IonRefresherContent,
   IonFab,
   IonFabButton,
+  IonActionSheet,
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { trash, add } from 'ionicons/icons';
@@ -43,6 +44,7 @@ import { trash, add } from 'ionicons/icons';
     IonRefresherContent,
     IonFab,
     IonFabButton,
+    IonActionSheet,
   ],
 })
 export class HomePage {
@@ -53,6 +55,13 @@ export class HomePage {
     { id: 2, servicio: 'Manicure', fecha: 'Martes 26 nov, 2:30 PM' },
     { id: 3, servicio: 'Barba y afeitado', fecha: 'Jueves 28 nov, 9:00 AM' },
   ];
+
+  menuAbierto = false;
+  botonesMenu: any[] = [];
+
+  private temporizador: any = null;
+  private inicioX = 0;
+  private inicioY = 0;
 
   constructor() {
     addIcons({ trash, add });
@@ -75,5 +84,58 @@ export class HomePage {
       this.citas = [...this.citas];
       event.target.complete();
     }, 1000);
+  }
+
+  iniciarPresion(e: PointerEvent, cita: { id: number }) {
+    this.cancelarPresion();
+    this.inicioX = e.clientX;
+    this.inicioY = e.clientY;
+    this.temporizador = setTimeout(() => {
+      this.temporizador = null;
+      this.abrirMenu(cita.id);
+    }, 600);
+  }
+
+  moverPresion(e: PointerEvent) {
+    if (
+      this.temporizador &&
+      Math.hypot(e.clientX - this.inicioX, e.clientY - this.inicioY) > 10
+    ) {
+      this.cancelarPresion();
+    }
+  }
+
+  cancelarPresion() {
+    if (this.temporizador) {
+      clearTimeout(this.temporizador);
+      this.temporizador = null;
+    }
+  }
+
+  abrirMenu(id: number) {
+    this.botonesMenu = [
+      {
+        text: 'Confirmar asistencia',
+        handler: () => this.confirmar(id),
+      },
+      {
+        text: 'Cancelar cita',
+        role: 'destructive',
+        handler: () => this.eliminar(id),
+      },
+      {
+        text: 'Cerrar',
+        role: 'cancel',
+      },
+    ];
+    this.menuAbierto = true;
+  }
+
+  confirmar(id: number) {
+    this.citas = this.citas.map((c) =>
+      c.id === id && !c.fecha.includes('Confirmada')
+        ? { ...c, fecha: c.fecha + ' · Confirmada' }
+        : c
+    );
   }
 }

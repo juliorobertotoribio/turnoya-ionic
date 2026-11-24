@@ -15,7 +15,14 @@
   <ion-list>
     @for (cita of citas; track cita.id) {
       <ion-item-sliding>
-        <ion-item>
+        <ion-item
+          (pointerdown)="iniciarPresion($event, cita)"
+          (pointermove)="moverPresion($event)"
+          (pointerup)="cancelarPresion()"
+          (pointercancel)="cancelarPresion()"
+          (pointerleave)="cancelarPresion()"
+          (contextmenu)="$event.preventDefault()"
+        >
           <ion-label>
             <h2>{{ cita.servicio }}</h2>
             <p>{{ cita.fecha }}</p>
@@ -35,4 +42,11 @@
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+  <ion-action-sheet
+    [isOpen]="menuAbierto"
+    header="Opciones de la cita"
+    [buttons]="botonesMenu"
+    (didDismiss)="menuAbierto = false"
+  ></ion-action-sheet>
 </ion-content>
