@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240">
+  <rect width="400" height="240" fill="#dbeafe"/>
+  <rect x="0" y="200" width="400" height="40" fill="#94a3b8"/>
+  <rect x="60" y="70" width="280" height="130" fill="#f8fafc" stroke="#1e3a8a" stroke-width="4"/>
+  <rect x="50" y="50" width="300" height="30" fill="#0054e9"/>
+  <rect x="80" y="86" width="70" height="60" fill="#bfdbfe" stroke="#1e3a8a" stroke-width="3"/>
+  <rect x="250" y="86" width="70" height="60" fill="#bfdbfe" stroke="#1e3a8a" stroke-width="3"/>
+  <rect x="170" y="110" width="60" height="90" fill="#1e3a8a"/>
+  <circle cx="220" cy="158" r="4" fill="#facc15"/>
+  <text x="200" y="71" font-family="Arial" font-size="18" font-weight="bold" fill="#ffffff" text-anchor="middle">TURNO YA</text>
+  <text x="200" y="228" font-family="Arial" font-size="12" fill="#ffffff" text-anchor="middle">Barbería y Salón</text>
+</svg>

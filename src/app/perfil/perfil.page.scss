@@ -1,0 +1,18 @@
+.zoom-contenedor {
+  overflow: hidden;
+  touch-action: none;
+  border-radius: 8px;
+}
+
+.zoom-contenedor img {
+  width: 100%;
+  display: block;
+  transform-origin: center;
+}
+
+.botones-zoom {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
